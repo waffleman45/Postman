@@ -1,0 +1,4716 @@
+{
+	"variables": [],
+	"info": {
+		"name": "PaymentCard API Tests",
+		"_postman_id": "a51fc13b-3a17-4f72-7841-3b202686dbf6",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Internal API Calls",
+			"description": "",
+			"item": [
+				{
+					"name": "CreditDebitCards - All Fields Happy Path - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 201\"] = responseCode.code === 201;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}\n"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// All fields - required and not\r\n\r\nvar d = new Date();\r\nvar n = d.getTime();\r\nvar params = [\r\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian1\",\"4263970000005262\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\r\n];\r\n\r\n// Build the request body string from the Postman request.data object\r\nvar requestBody = \"\";\r\nvar firstpass = true;\r\nfor(var i=0;i < params.length; i++) {\r\n        if(!firstpass){\r\n           \r\n        }\r\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\r\n        firstpass = false;\r\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\r\n}\r\npostman.setGlobalVariable(\"requestBody\", requestBody);\r\n\r\nvar mac = \"\";\r\nif(requestBody){\r\n    // SHA1 hash\r\n    mac = CryptoJS.SHA1(requestBody);\r\n}\r\n\r\npostman.setGlobalVariable(\"n\", n);\r\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian1",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "Brian Moore",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "Suite 1",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "city",
+									"value": "Gilbert",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "state",
+									"value": "AZ",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "US",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "phone",
+									"value": "4253581427",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Required Fields Only Happy Path - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 201\"] = responseCode.code === 201;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Only required fields\r\n\r\nvar d = new Date();\r\nvar n = d.getTime();\r\nvar params = [\r\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian2\",\"4263970000005262\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\r\n];\r\n\r\n// Build the request body string from the Postman request.data object\r\nvar requestBody = \"\";\r\nvar firstpass = true;\r\nfor(var i=0;i < params.length; i++) {\r\n        if(!firstpass){\r\n           \r\n        }\r\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\r\n        firstpass = false;\r\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\r\n}\r\npostman.setGlobalVariable(\"requestBody\", requestBody);\r\n\r\nvar mac = \"\";\r\nif(requestBody){\r\n    // SHA1 hash\r\n    mac = CryptoJS.SHA1(requestBody);\r\n}\r\n\r\npostman.setGlobalVariable(\"n\", n);\r\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian2",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Address2 empty - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 201\"] = responseCode.code === 201;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Address2 empty\r\n\r\nvar d = new Date();\r\nvar n = d.getTime();\r\nvar params = [\r\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian3\",\"4263970000005262\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\r\n];\r\n\r\n// Build the request body string from the Postman request.data object\r\nvar requestBody = \"\";\r\nvar firstpass = true;\r\nfor(var i=0;i < params.length; i++) {\r\n        if(!firstpass){\r\n           \r\n        }\r\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\r\n        firstpass = false;\r\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\r\n}\r\npostman.setGlobalVariable(\"requestBody\", requestBody);\r\n\r\nvar mac = \"\";\r\nif(requestBody){\r\n    // SHA1 hash\r\n    mac = CryptoJS.SHA1(requestBody);\r\n}\r\n\r\npostman.setGlobalVariable(\"n\", n);\r\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian3",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Address2 (40 Characters) - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 201\"] = responseCode.code === 201;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Address2 at max character length\r\n\r\nvar d = new Date();\r\nvar n = d.getTime();\r\nvar params = [\r\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian4\",\"4263970000005262\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\r\n];\r\n\r\n// Build the request body string from the Postman request.data object\r\nvar requestBody = \"\";\r\nvar firstpass = true;\r\nfor(var i=0;i < params.length; i++) {\r\n        if(!firstpass){\r\n           \r\n        }\r\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\r\n        firstpass = false;\r\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\r\n}\r\npostman.setGlobalVariable(\"requestBody\", requestBody);\r\n\r\nvar mac = \"\";\r\nif(requestBody){\r\n    // SHA1 hash\r\n    mac = CryptoJS.SHA1(requestBody);\r\n}\r\n\r\npostman.setGlobalVariable(\"n\", n);\r\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian4",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "abcdefghijklmnopqrstuvwxyz0123456789ABC",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Address2 too long (41 characters) - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Address2 too many characters\r\n\r\nvar d = new Date();\r\nvar n = d.getTime();\r\nvar params = [\r\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian5\",\"4263970000005262\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\r\n];\r\n\r\n// Build the request body string from the Postman request.data object\r\nvar requestBody = \"\";\r\nvar firstpass = true;\r\nfor(var i=0;i < params.length; i++) {\r\n        if(!firstpass){\r\n           \r\n        }\r\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\r\n        firstpass = false;\r\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\r\n}\r\npostman.setGlobalVariable(\"requestBody\", requestBody);\r\n\r\nvar mac = \"\";\r\nif(requestBody){\r\n    // SHA1 hash\r\n    mac = CryptoJS.SHA1(requestBody);\r\n}\r\n\r\npostman.setGlobalVariable(\"n\", n);\r\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian5",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "abcdefghijklmnopqrstuvwxyz0123456789ABCDE",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - NameOnCard Empty - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 201\"] = responseCode.code === 201;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Name on card empty\r\n\r\nvar d = new Date();\r\nvar n = d.getTime();\r\nvar params = [\r\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian6\",\"4263970000005262\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\r\n];\r\n\r\n// Build the request body string from the Postman request.data object\r\nvar requestBody = \"\";\r\nvar firstpass = true;\r\nfor(var i=0;i < params.length; i++) {\r\n        if(!firstpass){\r\n           \r\n        }\r\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\r\n        firstpass = false;\r\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\r\n}\r\npostman.setGlobalVariable(\"requestBody\", requestBody);\r\n\r\nvar mac = \"\";\r\nif(requestBody){\r\n    // SHA1 hash\r\n    mac = CryptoJS.SHA1(requestBody);\r\n}\r\n\r\npostman.setGlobalVariable(\"n\", n);\r\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian6",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - NameOnCard (40 Characters) - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 201\"] = responseCode.code === 201;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Name on card at max character length\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian7\",\"4263970000005262\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian7",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "BrianBrianBrianBrianBrianBrianBrianBrian",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - NameOnCard Too Long (41 characters) - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Name on card too long\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian8\",\"4263970000005262\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian8",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "BrianBrianBrianBrianBrianBrianBrianBrianM",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - City Empty - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 201\"] = responseCode.code === 201;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// City is empty\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian9\",\"4263970000005262\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian9",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - City (40 Characters) - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 201\"] = responseCode.code === 201;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// City at max character length\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian10\",\"4263970000005262\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian10",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "GilbertGilbertGilbertGilbertGilbertGilbe",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - City Too Long (41 characters) - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// City is too long\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian11\",\"4263970000005262\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian11",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "GilbertGilbertGilbertGilbertGilbertGilber",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Valid Visa Card - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 201\"] = responseCode.code === 201;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Valid Visa card number\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian12\",\"4263970000005262\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian12",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Valid AMEX Card - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 201\"] = responseCode.code === 201;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Valid AMEX card\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian13\",\"378282246310005\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian13",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "378282246310005",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Valid MasterCard - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 201\"] = responseCode.code === 201;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Valid Mastercard number\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian14\",\"5425230000004415\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian14",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "5425230000004415",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Invalid Visa Card - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Invalid Visa card number\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian15\",\"426397000000526\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian15",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "426397000000526",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - invalid MasterCard - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Invalid Mastercard number\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian16\",\"542523000000441\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian16",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "542523000000441",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Invalid AMEX Card - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Invalid AMEX card number\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian17\",\"37828224631000\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian17",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "37828224631000",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Valid Visa Card Invalid Expiration Month - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Valid VISA card, invalid expiration month\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian21\",\"4263970000005262\",\"13\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian21",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "13",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Valid MasterCard Invalid Expiration Month - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Valid Mastercard, invalid expiration month\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian22\",\"5425230000004415\",\"13\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian22",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "5425230000004415",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "13",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Valid AMEX Card Invalid Expiration Month - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Valid AMEX card, invalid expiration month\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian23\",\"378282246310005\",\"13\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian23",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "378282246310005",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "13",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Valid Visa Card Invalid Expiration Year - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Valid VISA card, invalid expiration year\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian24\",\"4263970000005262\",\"07\",\"20100\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian24",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4263970000005262",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "20100",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Valid MasterCard Invalid Expiration Year - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Valid Mastercard, invalid expiration year\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian25\",\"5425230000004415\",\"07\",\"20100\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian25",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "5425230000004415",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "20100",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Valid AMEX Card Invalid Expiration Year - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Valid AMEX card, invalid expiration year\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian26\",\"378282246310005\",\"07\",\"20100\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian26",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "378282246310005",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "20100",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Missing applicationId - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// All fields - required and not\r\n\r\nvar d = new Date();\r\nvar n = d.getTime();\r\nvar params = [\r\n    [\"test\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian27\",\"4111111111111111\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\r\n];\r\n\r\n// Build the request body string from the Postman request.data object\r\nvar requestBody = \"\";\r\nvar firstpass = true;\r\nfor(var i=0;i < params.length; i++) {\r\n        if(!firstpass){\r\n           \r\n        }\r\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\r\n        firstpass = false;\r\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\r\n}\r\npostman.setGlobalVariable(\"requestBody\", requestBody);\r\n\r\nvar mac = \"\";\r\nif(requestBody){\r\n    // SHA1 hash\r\n    mac = CryptoJS.SHA1(requestBody);\r\n}\r\n\r\npostman.setGlobalVariable(\"n\", n);\r\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian27",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4111111111111111",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Missing userId - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Missing userId\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"Brian28\",\"4111111111111111\",\"07\",\"2019\",\"Brian Moore\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian28",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4111111111111111",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Missing referenceName - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 201\"] = responseCode.code === 201;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Missing referenceName\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"\",\"4111111111111111\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4111111111111111",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Missing accountNumber - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Missing accountNumber\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian29\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian29",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Missing expireMonth - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Missing expireMonth\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian30\",\"4111111111111111\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian30",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4111111111111111",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Missing expireYear - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Missing expireYear\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian31\",\"4111111111111111\",\"07\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian31",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4111111111111111",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Missing address1 - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Missing address1\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian32\",\"4111111111111111\",\"07\",\"2019\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian32",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4111111111111111",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Missing postalCode - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 201\"] = responseCode.code === 201;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Missing postalCode\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian33\",\"4111111111111111\",\"07\",\"2019\",\"123 Street\",\"\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian33",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4111111111111111",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Missing Timestamp - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Missing Timestamp\n\nvar n = 0;\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian34\",\"4111111111111111\",\"07\",\"2019\",\"123 Street\",\"85297\"]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian34",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4111111111111111",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Invalid Timestamp - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Invalid Timestamp\n\nvar n = 0;\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian35\",\"4111111111111111\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian35",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4111111111111111",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "0",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Expired Timestamp - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Expired Timestamp\n\nvar n = 1474572118062;\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian36\",\"4111111111111111\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian36",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4111111111111111",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "1474572118062",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "{{mac}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Missing Hash - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Missing hash\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian37\",\"4111111111111111\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian37",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4111111111111111",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Invalid Hash - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Invalid hash\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian38\",\"4111111111111111\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian38",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4111111111111111",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "-1--1--3-21434",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "CreditDebitCards - Expired Hash - Group 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\ntry\n{\n    tests[\"Status code is 400\"] = responseCode.code === 400;\n}\ncatch(err)\n{\n    tests[\"Unexpected Exception\"] = false;\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// All fields - required and not\n\nvar d = new Date();\nvar n = d.getTime();\nvar params = [\n    [\"test\",\"000001\",\"05CF8B56-00AC-4A60-B256-10CD6142E91D\",\"Brian39\",\"4111111111111111\",\"07\",\"2019\",\"123 Street\",\"85297\",n]\n];\n\n// Build the request body string from the Postman request.data object\nvar requestBody = \"\";\nvar firstpass = true;\nfor(var i=0;i < params.length; i++) {\n        if(!firstpass){\n           \n        }\n        requestBody += params[i][0]  + params[i][1]+ params[i][2]+  params[i][3]+  params[i][4]+  params[i][5]+  params[i][6]+  params[i][7]+  params[i][8]+  params[i][9];\n        firstpass = false;\n        postman.setGlobalVariable(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7], params[i][8], params[i][9]);\n}\npostman.setGlobalVariable(\"requestBody\", requestBody);\n\nvar mac = \"\";\nif(requestBody){\n    // SHA1 hash\n    mac = CryptoJS.SHA1(requestBody);\n}\n\npostman.setGlobalVariable(\"n\", n);\npostman.setGlobalVariable(\"mac\", mac);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://qa-dvh.icpdev.io/cs/api/paymentmethods/creditdebitcards",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "applicationId",
+									"value": "000001",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "userId",
+									"value": "05CF8B56-00AC-4A60-B256-10CD6142E91D",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "referenceName",
+									"value": "Brian39",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "accountNumber",
+									"value": "4111111111111111",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireMonth",
+									"value": "07",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "expireYear",
+									"value": "2019",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "nameOnCard",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "address1",
+									"value": "123 Street",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "address2",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "state",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "postalCode",
+									"value": "85297",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "countryCode",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text",
+									"enabled": false
+								},
+								{
+									"key": "timestamp",
+									"value": "{{n}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "hash",
+									"value": "cf27cb754b4ba687c288ea81b71758af96989b15",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
