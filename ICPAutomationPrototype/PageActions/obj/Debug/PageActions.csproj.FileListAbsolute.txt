@@ -1,0 +1,17 @@
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\PageActions.dll
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\PageActions.pdb
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\Selenium.WebDriverBackedSelenium.dll
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\ThoughtWorks.Selenium.Core.dll
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\WebDriver.dll
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\WebDriver.Support.dll
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\Selenium.WebDriverBackedSelenium.pdb
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\Selenium.WebDriverBackedSelenium.xml
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\ThoughtWorks.Selenium.Core.pdb
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\ThoughtWorks.Selenium.Core.xml
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\WebDriver.pdb
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\WebDriver.xml
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\WebDriver.Support.pdb
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\bin\Debug\WebDriver.Support.xml
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\obj\Debug\PageActions.dll
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\obj\Debug\PageActions.pdb
+C:\Users\bbmoore\Documents\Visual Studio 2015\Projects\ICPAutomationPrototype\PageActions\obj\Debug\PageActions.csprojResolveAssemblyReference.cache
